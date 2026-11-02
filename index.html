@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>短视频创作作品集 · 编导 / 剪辑 / 内容主管</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8501F'/%3E%3Cpath d='M13 11l9 5-9 5z' fill='%23F7F5F0'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Archivo+Black&family=Archivo:wght@500;700;900&display=swap">
+<style>
+  :root{
+    --paper:#F7F5F0;
+    --paper-2:#EFECE4;
+    --ink:#16130E;
+    --ink-2:#4A4438;
+    --muted:#8A8373;
+    --line:rgba(22,19,14,.14);
+    --accent:#E8501F;
+    --accent-2:#0E6B5C;
+    --accent-3:#C99A2E;
+    --white:#FDFCF9;
+    --card:#FDFCF9;
+    --radius:18px;
+    --shadow:0 18px 50px -28px rgba(22,19,14,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  img,video{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- 顶部导航 ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    background:rgba(247,245,240,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;gap:18px;height:62px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.3px;}
+  .brand .mark{
+    width:26px;height:26px;border-radius:7px;background:var(--accent);
+    display:grid;place-items:center;color:#fff;flex:none;
+  }
+  .brand .mark svg{width:14px;height:14px;}
+  .nav-links{display:flex;gap:4px;margin-left:auto;align-items:center;}
+  .nav-links a{
+    font-size:13.5px;font-weight:500;color:var(--ink-2);
+    padding:7px 12px;border-radius:8px;transition:.18s;
+  }
+  .nav-links a:hover{background:var(--paper-2);color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:150px 0 70px;
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(232,80,31,.10), transparent 60%),
+      radial-gradient(900px 420px at -10% 10%, rgba(14,107,92,.08), transparent 55%),
+      var(--ink);
+    color:var(--paper);
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px);
+    background-size:100% 100%;
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;letter-spacing:2px;color:#e9c15a;font-weight:700;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:#e9c15a;display:inline-block;}
+  .hero h1{
+    font-family:'Archivo Black','Noto Sans SC',sans-serif;
+    font-size:clamp(44px,7vw,84px);line-height:1.02;letter-spacing:-1px;
+    margin:22px 0 8px;
+  }
+  .hero h1 .dot{color:var(--accent);}
+  .hero .role{
+    font-size:clamp(17px,2.4vw,24px);font-weight:500;color:#d9d3c6;margin-bottom:34px;
+  }
+  .hero .role b{color:var(--paper);}
+  .hero-stats{
+    display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(247,245,240,.16);
+    margin-top:40px;
+  }
+  .hero-stat{
+    padding:20px 30px 6px 0;margin-right:48px;flex:1 1 180px;
+  }
+  .hero-stat .num{
+    font-family:'Archivo','Noto Sans SC',sans-serif;font-weight:900;
+    font-size:clamp(26px,3.6vw,40px);color:var(--paper);line-height:1.1;
+  }
+  .hero-stat .num em{font-style:normal;color:#e9c15a;}
+  .hero-stat .lbl{font-size:13px;color:#b6b0a2;margin-top:4px;letter-spacing:.5px;}
+  .hero-cta{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;}
+  .hero-cta .btn{border-color:rgba(247,245,240,.5);color:var(--paper);}
+  .hero-cta .btn:hover{background:var(--paper);color:var(--ink);}
+  .hero-cta .btn-solid{border-color:var(--accent);}
+  .btn{
+    border:1px solid var(--ink);background:transparent;color:var(--ink);
+    padding:8px 16px;border-radius:9px;font-size:13px;font-weight:700;
+    cursor:pointer;font-family:inherit;transition:.18s;white-space:nowrap;display:inline-block;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper);}
+  .btn-solid{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn-solid:hover{background:#c84212;border-color:#c84212;color:#fff;}
+
+  /* ---------- 总览时间轴 ---------- */
+  .sec{padding:90px 0;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:44px;flex-wrap:wrap;}
+  .sec-no{font-family:'Archivo',sans-serif;font-weight:900;color:var(--accent);font-size:15px;}
+  .sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;letter-spacing:-.5px;}
+  .sec-head .sub{color:var(--muted);font-size:14px;margin-left:auto;}
+  .timeline{display:grid;grid-template-columns:1fr;gap:14px;}
+  .tl-item{
+    display:grid;grid-template-columns:64px 1fr auto;gap:22px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 26px;transition:.2s;cursor:pointer;
+  }
+  .tl-item:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(232,80,31,.4);}
+  .tl-num{font-family:'Archivo',sans-serif;font-weight:900;font-size:30px;color:var(--paper-2);-webkit-text-stroke:1px var(--accent);}
+  .tl-role{font-size:19px;font-weight:900;}
+  .tl-role .co{font-size:13px;color:var(--accent);font-weight:700;margin-left:8px;letter-spacing:.3px;}
+  .tl-desc{color:var(--ink-2);font-size:14px;margin-top:3px;}
+  .tl-meta{text-align:right;}
+  .tl-meta .tag{
+    display:inline-block;background:var(--paper-2);border-radius:7px;padding:3px 10px;
+    font-size:12px;font-weight:700;color:var(--ink-2);margin-left:6px;
+  }
+  .tl-meta .tag.hot{background:rgba(232,80,31,.12);color:var(--accent);}
+
+  /* ---------- 案例卡片 ---------- */
+  .case{
+    background:var(--card);border:1px solid var(--line);border-radius:24px;
+    overflow:hidden;margin-bottom:40px;box-shadow:var(--shadow);
+  }
+  .case-top{
+    display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+    padding:30px 34px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#FBF9F4,var(--card));
+  }
+  .case-no{
+    font-family:'Archivo',sans-serif;font-weight:900;font-size:15px;color:#fff;
+    background:var(--accent);width:46px;height:46px;border-radius:12px;
+    display:grid;place-items:center;letter-spacing:.5px;
+  }
+  .case-no.c2{background:var(--accent-2);}
+  .case-no.c3{background:#B4600F;}
+  .case-no.c4{background:var(--accent-3);}
+  .case-title .role{font-size:24px;font-weight:900;letter-spacing:-.3px;}
+  .case-title .co{color:var(--accent);font-weight:700;font-size:14px;margin-top:2px;}
+  .case-years{font-size:13px;color:var(--muted);font-weight:500;}
+  .case-main{padding:30px 34px;}
+
+  .block-label{
+    font-size:12px;font-weight:900;letter-spacing:1.5px;color:var(--accent-2);
+    text-transform:uppercase;margin:22px 0 10px;display:flex;align-items:center;gap:8px;
+  }
+  .block-label::after{content:"";flex:1;height:1px;background:var(--line);}
+  .block-label:first-child{margin-top:0;}
+  .desc{color:var(--ink-2);font-size:15px;}
+  .duty-list{list-style:none;margin-top:6px;}
+  .duty-list li{
+    padding:7px 0 7px 26px;position:relative;color:var(--ink);font-size:14.5px;border-bottom:1px dashed var(--line);
+  }
+  .duty-list li:last-child{border-bottom:none;}
+  .duty-list li::before{
+    content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:3px;
+    background:var(--accent);transform:rotate(45deg);
+  }
+
+  /* 视频与截图 */
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  .video-cell{border-radius:14px;overflow:hidden;background:#0d0b09;aspect-ratio:16/9;}
+  .video-cell video{width:100%;height:100%;object-fit:contain;background:#000;}
+  .shot-row{display:flex;justify-content:center;margin-top:14px;}
+  .shot-row img{width:360px;max-width:100%;border-radius:12px;border:1px solid var(--line);}
+  .note{
+    font-size:12.5px;color:var(--muted);margin-top:12px;padding:10px 14px;
+    background:rgba(201,154,46,.10);border-left:3px solid var(--accent-3);border-radius:8px;
+  }
+
+  /* ---------- 联系方式 ---------- */
+  .contact{background:var(--ink);color:var(--paper);}
+  .contact .wrap{padding:70px 28px 60px;text-align:center;}
+  .contact h2{font-size:clamp(24px,3vw,34px);font-weight:900;}
+  .contact .c-line{margin-top:18px;color:#c9c2b3;font-size:15px;}
+  .contact .c-line a{color:#e9c15a;font-weight:700;}
+
+  /* ---------- 响应式 ---------- */
+  @media(max-width:900px){
+    .video-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .tl-item{grid-template-columns:44px 1fr;grid-template-rows:auto auto;}
+    .tl-meta{grid-column:2;text-align:left;}
+    .tl-num{font-size:24px;}
+    .case-top{grid-template-columns:1fr;gap:12px;}
+    .case-years{grid-column:1;}
+  }
+  @media(max-width:560px){
+    .hero{padding:130px 0 50px;}
+    .wrap{padding:0 18px;}
+    .case-main{padding:22px 20px;}
+    .hero .eyebrow{font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></span>
+      <span>短视频作品集</span>
+    </div>
+    <div class="nav-links">
+      <a href="#overview">总览</a>
+      <a href="#c1">早教机</a>
+      <a href="#c2">丰胸类目</a>
+      <a href="#c3">手持小风扇</a>
+      <a href="#c4">必洁仕油污净</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Portfolio · 电商短视频 · 信息流广告</div>
+    <h1>刘耀祖<em class="dot">.</em></h1>
+    <div class="role">短视频<b> 编导 / 剪辑 / 内容主管</b>，深耕电商广告内容，从一线剪辑到带 8 人团队，见证并推动多品类从起盘到爆量。</div>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#c1">查看作品案例</a>
+      <a class="btn" href="#overview">职业总览</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4<em>段</em></div><div class="lbl">电商广告实战经历</div></div>
+      <div class="hero-stat"><div class="num">8<em>人</em></div><div class="lbl">剪辑团队管理规模</div></div>
+      <div class="hero-stat"><div class="num">2000<em>万</em></div><div class="lbl">早教机项目月销 GMV</div></div>
+      <div class="hero-stat"><div class="num">267<em>万</em></div><div class="lbl">单月投放消耗峰值</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 职业总览时间轴 ===== -->
+<section class="sec" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">OVERVIEW</span>
+      <h2>四段经历，一条增长主线</h2>
+      <span class="sub">从剪辑执行 → 团队管理 → 内容策略，横跨早教、健康、个护、日化四大品类</span>
+    </div>
+    <div class="timeline">
+      <a class="tl-item" href="#c1">
+        <div class="tl-num">01</div>
+        <div>
+          <div class="tl-role">剪辑组长 <span class="co">名校堂早教机</span></div>
+          <div class="tl-desc">带领 8 人剪辑团队，搭建内容产线，驱动月销 GMV 破 2000 万</div>
+        </div>
+        <div class="tl-meta"><span class="tag hot">团队管理</span><span class="tag">GMV 2000万</span></div>
+      </a>
+      <a class="tl-item" href="#c2">
+        <div class="tl-num">02</div>
+        <div>
+          <div class="tl-role">剪辑 <span class="co">丰胸类目（黑五类）</span></div>
+          <div class="tl-desc">独立操盘高消耗素材，单月投放消耗峰值 267 万，平均月消耗百万级</div>
+        </div>
+        <div class="tl-meta"><span class="tag hot">消耗 267万</span><span class="tag">素材产出</span></div>
+      </a>
+      <a class="tl-item" href="#c3">
+        <div class="tl-num">03</div>
+        <div>
+          <div class="tl-role">编导 <span class="co">手持小风扇</span></div>
+          <div class="tl-desc">从脚本到成片全流程编导，输出高转化信息流内容</div>
+        </div>
+        <div class="tl-meta"><span class="tag">全流程编导</span></div>
+      </a>
+      <a class="tl-item" href="#c4">
+        <div class="tl-num">04</div>
+        <div>
+          <div class="tl-role">内容主管 <span class="co">必洁仕油污净</span></div>
+          <div class="tl-desc">统筹品牌内容矩阵，主导油污净品类内容策略与产能</div>
+        </div>
+        <div class="tl-meta"><span class="tag">内容策略</span><span class="tag">矩阵管理</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 案例 01 · 剪辑组长 / 早教机 ===== -->
+<section class="sec" id="c1" style="padding-top:0;">
+  <div class="wrap">
+    <article class="case">
+      <div class="case-top">
+        <div class="case-no">01</div>
+        <div class="case-title">
+          <div class="role">剪辑组长 · 早教机项目</div>
+          <div class="co">名校堂早教机 · 童教品类</div>
+        </div>
+        <div class="case-years">任职时长：2021.07 — 2024.06</div>
+      </div>
+      <div class="case-main">
+        <div class="block-label">工作职责</div>
+        <ul class="duty-list">
+          <li>带领 8 人剪辑团队，搭建标准化剪辑产线，统筹排期与产能</li>
+          <li>负责素材方向把控、脚本拆解与成片质检，保证内容稳定产出</li>
+          <li>主导爆量素材拆解与复用，提升投产效率，驱动月销 GMV 突破 2000 万</li>
+          <li>建立团队 SOP 与新人带教机制，提升整体产出质量与速度</li>
+        </ul>
+        <div class="block-label">作品展示 · 视频</div>
+        <div class="video-grid">
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-早教机-01.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-早教机-02.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-早教机-03.mp4"></video></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 案例 02 · 剪辑 / 丰胸类目 ===== -->
+<section class="sec" id="c2" style="padding-top:0;">
+  <div class="wrap">
+    <article class="case">
+      <div class="case-top">
+        <div class="case-no c2">02</div>
+        <div class="case-title">
+          <div class="role">剪辑 · 丰胸类目</div>
+          <div class="co">黑五类 / 功效型健康品类 · 高消耗投放</div>
+        </div>
+        <div class="case-years">任职时长：2024.06 — 2025.09</div>
+      </div>
+      <div class="case-main">
+        <div class="block-label">工作职责</div>
+        <ul class="duty-list">
+          <li>独立负责功效型品类信息流素材剪辑，高频产出高转化内容</li>
+          <li>结合投放数据快速迭代素材，单月投放消耗峰值达 267 万</li>
+          <li>平均月消耗稳定在百万级，持续为项目贡献跑量素材</li>
+          <li>拆解竞品爆款，沉淀素材方法论并反哺投放策略</li>
+        </ul>
+        <div class="block-label">作品展示 · 视频</div>
+        <div class="video-grid">
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-黑五类-01.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-黑五类-02.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-黑五类-03.mp4"></video></div>
+        </div>
+        <div class="shot-row"><img src="assets/图片1.png" alt="消耗报表截图"></div>
+        <div class="note">黑五类高消耗场景，核心看「素材跑量能力 + 消耗规模」，三条代表视频 + 一张消耗报表截图。</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 案例 03 · 编导 / 手持小风扇 ===== -->
+<section class="sec" id="c3" style="padding-top:0;">
+  <div class="wrap">
+    <article class="case">
+      <div class="case-top">
+        <div class="case-no c3">03</div>
+        <div class="case-title">
+          <div class="role">编导 · 手持小风扇</div>
+          <div class="co">便携小家电 · 全流程编导</div>
+        </div>
+        <div class="case-years">任职时长：2025.10 — 2026.06</div>
+      </div>
+      <div class="case-main">
+        <div class="block-label">工作职责</div>
+        <ul class="duty-list">
+          <li>从脚本、分镜到拍摄剪辑全流程编导，主导内容创意方向</li>
+          <li>围绕便携风扇卖点（降温、静音、续航、便携）构建内容矩阵</li>
+          <li>把控成片节奏与转化钩子，提升完播与点击转化</li>
+          <li>与投放协同测试素材方向，持续优化内容转化效率</li>
+        </ul>
+        <div class="block-label">作品展示 · 视频</div>
+        <div class="video-grid">
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-小风扇-01.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-小风扇-02.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-小风扇-03.mp4"></video></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 案例 04 · 内容主管 / 必洁仕油污净 ===== -->
+<section class="sec" id="c4" style="padding-top:0;">
+  <div class="wrap">
+    <article class="case">
+      <div class="case-top">
+        <div class="case-no c4">04</div>
+        <div class="case-title">
+          <div class="role">内容主管 · 必洁仕油污净</div>
+          <div class="co">必洁仕 · 日化 / 厨房清洁品类</div>
+        </div>
+        <div class="case-years">任职时长：2026.07 — 2026.10</div>
+      </div>
+      <div class="case-main">
+        <div class="block-label">工作职责</div>
+        <ul class="duty-list">
+          <li>统筹品牌内容矩阵，负责油污净品类内容策略与整体产能</li>
+          <li>搭建内容小组与标准化流程，管理素材生产、审核与投放衔接</li>
+          <li>围绕「去油污」核心场景与痛点，打造差异化内容表达</li>
+          <li>以数据驱动内容迭代，协同投放团队提升整体投产</li>
+        </ul>
+        <div class="block-label">作品展示 · 视频</div>
+        <div class="video-grid">
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-油污净-01.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-油污净-02.mp4"></video></div>
+          <div class="video-cell"><video controls preload="metadata" playsinline src="assets/LYZ-油污净-03.mp4"></video></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 联系方式 ===== -->
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <h2>期待与你的团队共创爆量内容</h2>
+    <div class="c-line">电话 / 微信：<a href="tel:15779684460">157-7968-4460</a> ｜ 邮箱：<a href="mailto:1307145518@qq.com">1307145518@qq.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
